@@ -1,0 +1,379 @@
+{
+  "disclaimer": "ALL NUMBERS BELOW ARE ON SYNTHETIC DATA. They are not clinical validation and say nothing about real patients or real deployments.",
+  "generated_utc": "2026-10-13T21:36:51+00:00",
+  "data": {
+    "n_conversations": 6000,
+    "weeks": "1-26",
+    "n_template_families": 399,
+    "recorded_class_mix": {
+      "no_risk": 0.6852,
+      "low": 0.184,
+      "moderate": 0.0895,
+      "crisis": 0.0413
+    },
+    "recorded_crisis_n": 248,
+    "label_noise_rate": 0.025,
+    "oracle_ceiling_crisis_recall": "235/248 = 0.948",
+    "synthetic": true
+  },
+  "splits": {
+    "train": {
+      "n": 2202,
+      "n_crisis": 96,
+      "weeks": "1-12"
+    },
+    "val": {
+      "n": 736,
+      "n_crisis": 25,
+      "weeks": "13-16"
+    },
+    "test": {
+      "n": 758,
+      "n_crisis": 39,
+      "weeks": "1-16"
+    },
+    "monitor": {
+      "n": 2304,
+      "n_crisis": 88,
+      "weeks": "17-26"
+    }
+  },
+  "model_selection": {
+    "winner": "M2_tfidf_lr",
+    "promote_m3": false,
+    "m3_minus_m2_dev_oof_pr_auc": {
+      "a": "M2_tfidf_lr",
+      "b": "M3_xgb",
+      "point_diff": -0.32687855107345065,
+      "ci_lo": -0.45025323497509673,
+      "ci_hi": -0.21991468412675141,
+      "ci_excludes_0": true,
+      "n_boot_used": 1000,
+      "skipped": 0
+    },
+    "m2_minus_m1_dev_oof_pr_auc": {
+      "a": "M1_rules",
+      "b": "M2_tfidf_lr",
+      "point_diff": 0.7135223093737902,
+      "ci_lo": 0.6082092082580255,
+      "ci_hi": 0.8028512656161755,
+      "ci_excludes_0": true,
+      "n_boot_used": 1000,
+      "skipped": 0
+    },
+    "m2_selected_C": 10.0,
+    "m3_best_params": {
+      "xgb__subsample": 0.6,
+      "xgb__reg_lambda": 0.5,
+      "xgb__n_estimators": 200,
+      "xgb__min_child_weight": 1,
+      "xgb__max_depth": 5,
+      "xgb__learning_rate": 0.05,
+      "xgb__gamma": 0,
+      "xgb__colsample_bytree": 0.7
+    }
+  },
+  "frozen_decision": {
+    "model": "M2_tfidf_lr",
+    "threshold_raw": 0.09269460222173193,
+    "threshold_calibrated": 0.03487668537085133,
+    "platt": {
+      "a": 2.112190683596545,
+      "b": 1.4978263048412837,
+      "fitted_on": "validation",
+      "n": 736,
+      "n_crisis": 25
+    },
+    "cost_matrix": {
+      "fn": 20.0,
+      "fp": 1.0
+    },
+    "m3_threshold_raw": 0.1758977472782135
+  },
+  "test_results": {
+    "M0_prior": {
+      "pr_auc": 0.0514511873350923,
+      "pr_auc_lo": 0.0213035904901296,
+      "pr_auc_hi": 0.0957146539027982,
+      "recall": 0.0,
+      "recall_lo": 0.0,
+      "recall_hi": 0.089669853600239,
+      "precision": null,
+      "tp": 0,
+      "fp": 0,
+      "fn": 39,
+      "tn": 719,
+      "expected_cost": 780.0,
+      "cost_per_1000": 1029.023746701847
+    },
+    "M1_rules": {
+      "pr_auc": 0.2663892835396793,
+      "pr_auc_lo": 0.0449987211593984,
+      "pr_auc_hi": 0.4747175517587281,
+      "recall": 0.3076923076923077,
+      "recall_lo": 0.1856575344598306,
+      "recall_hi": 0.464215486155646,
+      "precision": 0.75,
+      "tp": 12,
+      "fp": 4,
+      "fn": 27,
+      "tn": 715,
+      "expected_cost": 544.0,
+      "cost_per_1000": 717.6781002638522
+    },
+    "M2_tfidf_lr": {
+      "pr_auc": 0.9516531657415636,
+      "pr_auc_lo": 0.82134541494753,
+      "pr_auc_hi": 1.0,
+      "recall": 0.9487179487179488,
+      "recall_lo": 0.8311406095436208,
+      "recall_hi": 0.9858223423536004,
+      "precision": 0.8409090909090909,
+      "tp": 37,
+      "fp": 7,
+      "fn": 2,
+      "tn": 712,
+      "expected_cost": 47.0,
+      "cost_per_1000": 62.00527704485488
+    },
+    "M3_xgb": {
+      "pr_auc": 0.8330731804664002,
+      "pr_auc_lo": 0.5718126332505779,
+      "pr_auc_hi": 0.9436899839214528,
+      "recall": 0.8205128205128205,
+      "recall_lo": 0.6733164837555724,
+      "recall_hi": 0.9102284818853,
+      "precision": 0.5818181818181818,
+      "tp": 32,
+      "fp": 23,
+      "fn": 7,
+      "tn": 696,
+      "expected_cost": 163.0,
+      "cost_per_1000": 215.0395778364116
+    }
+  },
+  "test_set": {
+    "n": 758,
+    "n_crisis": 39
+  },
+  "m2_calibration_test": {
+    "raw_M2": {
+      "brier": 0.00443316261421848,
+      "ece": 0.00932244905407632,
+      "mean_pred": 0.05182049334721935
+    },
+    "platt_M2": {
+      "brier": 0.003119253728205028,
+      "ece": 0.003870295574295027,
+      "mean_pred": 0.05004493438403247
+    }
+  },
+  "m2_val_vs_test": {
+    "val_pr_auc": 0.9917333333333336,
+    "test_pr_auc": 0.9516531657415636,
+    "val_recall": 1.0,
+    "test_recall": 0.9487179487179487,
+    "val_precision": 0.8333333333333334,
+    "test_precision": 0.8409090909090909
+  },
+  "success_criteria": {
+    "criterion_1_recall_ge_0.95_at_precision_ge_0.30_on_test": {
+      "met": false,
+      "recall": 0.9487179487179488,
+      "precision": 0.8409090909090909
+    },
+    "criterion_2_no_channel_or_language_slice_more_than_5pts_below_overall": {
+      "dev out-of-fold (supplementary)": {
+        "met_point_estimate": false,
+        "worst_slice": "language=en_es",
+        "gap_pts": -12.5,
+        "slice_recall": 0.833,
+        "slice_n_crisis": 12
+      },
+      "test (pre-registered)": {
+        "met_point_estimate": true,
+        "worst_slice": "channel=text",
+        "gap_pts": -2.9,
+        "slice_recall": 0.92,
+        "slice_n_crisis": 25
+      }
+    }
+  },
+  "slices": {
+    "table_file": "results/slice_metrics.csv"
+  },
+  "drift": {
+    "r1_warning_week": 18,
+    "r2_retrain_week": 20,
+    "drift_start_week": 17,
+    "validation_recall_frozen_m2": 1.0,
+    "monitor_recall_frozen_m2": 0.8409090909090909,
+    "retrain_week": 20,
+    "retrain_is_scheduled_fallback": false,
+    "stale": {
+      "threshold": 0.09269460222173193,
+      "pr_auc": 0.7688974140947593,
+      "recall": 0.8627450980392157,
+      "recall_lo": 0.7427804765736837,
+      "recall_hi": 0.9318898466845728,
+      "precision": 0.41509433962264153,
+      "fn": 7,
+      "fp": 62,
+      "cost_per_1000": 146.3768115942029
+    },
+    "retrained": {
+      "threshold": 0.10142691775753379,
+      "pr_auc": 0.8436884597252015,
+      "recall": 0.9607843137254902,
+      "recall_lo": 0.8678345101373474,
+      "recall_hi": 0.9891791437312488,
+      "precision": 0.494949494949495,
+      "fn": 2,
+      "fp": 50,
+      "cost_per_1000": 65.21739130434783
+    },
+    "pr_auc_diff_retrained_minus_stale": 0.0748,
+    "pr_auc_diff_ci": [
+      -0.05027588190165312,
+      0.18196637365045445
+    ],
+    "rules": {
+      "psi_limit": 0.25,
+      "oov_mult": 2.0,
+      "recall_floor": 0.9,
+      "min_window_crisis": 10,
+      "window_weeks": 4
+    }
+  },
+  "llm": {
+    "model": "openai/gpt-oss-120b",
+    "prompt_sha": "a60937f6c21e",
+    "n_golden": 300,
+    "n_crisis": 39,
+    "fallbacks": 0,
+    "mcnemar_llm_vs_m2": {
+      "a_only": 0,
+      "b_only": 6,
+      "discordant": 6,
+      "p_value": 0.03125
+    },
+    "metrics": [
+      {
+        "method": "M1_rules",
+        "tp": 12,
+        "fn": 27,
+        "fp_in_sample": 2,
+        "n_noncrisis_sample": 261,
+        "recall": 0.3076923076923077,
+        "recall_lo": 0.1856575344598306,
+        "recall_hi": 0.464215486155646,
+        "fp_est_full_test": 5.509578544061302,
+        "precision_reweighted": 0.6853391684901532,
+        "cost_per_1000_reweighted": 719.6696286860969
+      },
+      {
+        "method": "M2_tfidf_lr",
+        "tp": 37,
+        "fn": 2,
+        "fp_in_sample": 2,
+        "n_noncrisis_sample": 261,
+        "recall": 0.9487179487179487,
+        "recall_lo": 0.8311406095436208,
+        "recall_hi": 0.9858223423536004,
+        "fp_est_full_test": 5.509578544061302,
+        "precision_reweighted": 0.8703920684993242,
+        "cost_per_1000_reweighted": 60.039021825938384
+      },
+      {
+        "method": "M3_xgb",
+        "tp": 32,
+        "fn": 7,
+        "fp_in_sample": 9,
+        "n_noncrisis_sample": 261,
+        "recall": 0.8205128205128205,
+        "recall_lo": 0.6733164837555724,
+        "recall_hi": 0.9102284818853,
+        "fp_est_full_test": 24.79310344827586,
+        "precision_reweighted": 0.5634486945962356,
+        "cost_per_1000_reweighted": 217.40514966791014
+      },
+      {
+        "method": "LLM_openai/gpt-oss-120b",
+        "tp": 31,
+        "fn": 8,
+        "fp_in_sample": 4,
+        "n_noncrisis_sample": 261,
+        "recall": 0.7948717948717948,
+        "recall_lo": 0.6446572703687138,
+        "recall_hi": 0.8922040980208888,
+        "fp_est_full_test": 11.019157088122604,
+        "precision_reweighted": 0.7377587307376676,
+        "cost_per_1000_reweighted": 225.6189407495021
+      }
+    ],
+    "note": "zero-shot, one prompt, one run; precision and cost re-weighted from a crisis-enriched sample"
+  },
+  "audit": {
+    "n_logged": 2304,
+    "n_escalations": 175,
+    "model_version": "M2:8a0c63262d38|cfg:acf0015022e8",
+    "update_attempt": "blocked -> audit_log is append-only: UPDATE blocked",
+    "delete_attempt": "blocked -> audit_log is append-only: DELETE blocked",
+    "intact_chain": {
+      "ok": true,
+      "n_checked": 2304,
+      "first_bad_id": null,
+      "reason": ""
+    },
+    "tamper_demo": {
+      "edit row 100 (flip a decision)": {
+        "ok": false,
+        "n_checked": 99,
+        "first_bad_id": 100,
+        "reason": "row content modified"
+      },
+      "delete row 200": {
+        "ok": false,
+        "n_checked": 199,
+        "first_bad_id": 201,
+        "reason": "id gap (row deleted)"
+      }
+    }
+  },
+  "tests": {
+    "passed": 45,
+    "failed": 0,
+    "summary_line": "45 passed in 1.97s"
+  },
+  "tools_used": {
+    "pandas": "3.0.6",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "pydantic": "2.14.1",
+    "joblib": "1.6.0",
+    "pytest": "9.1.1",
+    "openpyxl": "3.1.5",
+    "nbformat": "5.11.1",
+    "certifi": "2026.7.22",
+    "sqlite3 (Python standard library)": "stdlib",
+    "jupyter nbconvert": "7.17.2",
+    "Python": "3.13.3"
+  },
+  "dashboard": {
+    "bi_exports_ready": true,
+    "screenshots": [],
+    "built": false
+  },
+  "claims_not_supported": [
+    "clinical validity or any real-patient performance",
+    "that the zero-shot LLM or XGBoost beat the simpler model",
+    "that retraining demonstrably recovered performance (its PR-AUC confidence interval included 0)",
+    "crisis recall of 0.95 or higher on test (it was just below)",
+    "any tool not listed under tools_used"
+  ]
+}

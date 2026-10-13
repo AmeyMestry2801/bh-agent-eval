@@ -5,7 +5,7 @@ PY ?= python
 S := results/.stamps
 
 .PHONY: all test llm clean
-all: $(S)/bi test
+all: $(S)/bi test docs
 
 data/raw/conversations.csv:
 	$(PY) -m src.generate_data
@@ -61,6 +61,9 @@ $(S)/bi: $(S)/audit $(S)/errors $(S)/eda
 
 test:
 	$(PY) -m pytest -q
+
+docs: $(S)/bi
+	$(PY) -m src.make_results
 
 # Optional: needs GROQ_API_KEY in .env. Not part of `make all`.
 llm:
