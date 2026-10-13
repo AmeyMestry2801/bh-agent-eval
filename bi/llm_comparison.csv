@@ -1,0 +1,5 @@
+dataset,method,tp,fn,fp_in_sample,n_noncrisis_sample,recall,recall_lo,recall_hi,fp_est_full_test,precision_reweighted,cost_per_1000_reweighted,data_origin
+test golden subset (39 crisis + 261 non-crisis; precision/cost re-weighted),M1_rules,12,27,2,261,0.3076923076923077,0.1856575344598306,0.464215486155646,5.509578544061302,0.6853391684901532,719.6696286860969,SYNTHETIC DATA
+test golden subset (39 crisis + 261 non-crisis; precision/cost re-weighted),M2_tfidf_lr,37,2,2,261,0.9487179487179488,0.8311406095436208,0.9858223423536004,5.509578544061302,0.8703920684993242,60.039021825938384,SYNTHETIC DATA
+test golden subset (39 crisis + 261 non-crisis; precision/cost re-weighted),M3_xgb,32,7,9,261,0.8205128205128205,0.6733164837555724,0.9102284818853,24.79310344827586,0.5634486945962356,217.40514966791017,SYNTHETIC DATA
+test golden subset (39 crisis + 261 non-crisis; precision/cost re-weighted),LLM_openai/gpt-oss-120b,31,8,4,261,0.7948717948717948,0.6446572703687138,0.8922040980208888,11.019157088122604,0.7377587307376676,225.6189407495021,SYNTHETIC DATA

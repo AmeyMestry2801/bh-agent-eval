@@ -1,0 +1,5 @@
+model,rung,description,status,data_origin
+M0_prior,0,Class prior (flags nobody),baseline,SYNTHETIC DATA
+M1_rules,1,"Hand-written regex rules, 30-char negation window",baseline,SYNTHETIC DATA
+M2_tfidf_lr,2,"TF-IDF word+char n-grams + logistic regression, Platt-calibrated",winner (pre-registered rule),SYNTHETIC DATA
+M3_xgb,3,XGBoost on TF-IDF-SVD + 6 engineered features,challenger (not promoted),SYNTHETIC DATA

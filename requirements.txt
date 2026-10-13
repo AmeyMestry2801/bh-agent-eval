@@ -1,0 +1,15 @@
+pandas
+numpy
+scipy
+statsmodels
+scikit-learn
+xgboost
+matplotlib
+seaborn
+pydantic
+pytest
+joblib
+shap
+jupyter
+openpyxl
+certifi
